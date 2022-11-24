@@ -1,6 +1,6 @@
 package com.bawp.contactroom.data;
 
-import com.bawp.contactroom.model.MediaModel;
+import com.bawp.contactroom.model.Contact;
 
 import java.util.List;
 
@@ -16,20 +16,20 @@ import androidx.room.Update;
 public interface ContactDao {
     // CRUD
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(MediaModel mediaModel);
+    void insert(Contact contact);
 
-    @Query("DELETE FROM MediaModel")
+    @Query("DELETE FROM contact_table")
     void deleteAll();
 
-    @Query("SELECT * FROM MediaModel ORDER BY name ASC")
-    LiveData<List<MediaModel>> getAllItems();
+    @Query("SELECT * FROM contact_table ORDER BY name ASC")
+    LiveData<List<Contact>> getAllItems();
 
-    @Query("SELECT * FROM MediaModel WHERE MediaModel.id == :id")
-    LiveData<MediaModel> get(int id);
+    @Query("SELECT * FROM contact_table WHERE contact_table.id == :id")
+    LiveData<Contact> get(int id);
 
     @Update
-    void update(MediaModel mediaModel);
+    void update(Contact contact);
 
     @Delete
-    void delete(MediaModel mediaModel);
+    void delete(Contact contact);
 }

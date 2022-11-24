@@ -14,7 +14,7 @@ import androidx.lifecycle.LiveData;
 public class MediaViewModel extends AndroidViewModel {
 
     public static ContactRepository repository;
-    public final LiveData<List<MediaModel>> allMedias;
+    public final LiveData<List<Contact>> allMedias;
 
 
     public MediaViewModel(@NonNull Application application) {
@@ -23,10 +23,10 @@ public class MediaViewModel extends AndroidViewModel {
         allMedias = repository.getAllData();
     }
 
-    public LiveData<List<MediaModel>> getAllItems() { return allMedias; }
-    public static void insert(MediaModel mediaModel) { repository.insert(mediaModel); }
+    public LiveData<List<Contact>> getAllItems() { return allMedias; }
+    public static void insert(Contact contact) { repository.insert(contact); }
 
-    public LiveData<MediaModel> get(int id) { return repository.get(id);}
-    public static void update(MediaModel mediaModel) { repository.update(mediaModel);}
-    public static void delete(MediaModel mediaModel) { repository.delete(mediaModel);}
+    public LiveData<Contact> get(int id) { return repository.get(id);}
+    public static void update(Contact contact) { repository.update(contact);}
+    public static void delete(Contact contact) { repository.delete(contact);}
 }

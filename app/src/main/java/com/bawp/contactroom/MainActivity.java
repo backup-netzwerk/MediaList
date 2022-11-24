@@ -6,7 +6,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.bawp.contactroom.adapter.RecyclerViewAdapter;
-import com.bawp.contactroom.model.MediaModel;
+import com.bawp.contactroom.model.Contact;
 import com.bawp.contactroom.model.MediaViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -68,19 +68,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             String occupation = data.getStringExtra(NewContact.OCCUPATION);
 
             assert name != null;
-            MediaModel mediaModel = new MediaModel(name, occupation);
+            Contact contact = new Contact(name, occupation);
 
-            MediaViewModel.insert(mediaModel);
+            MediaViewModel.insert(contact);
         }
     }
 
     @Override
     public void onContactClick(int position) {
-        MediaModel mediaModel = Objects.requireNonNull(mediaViewModel.allMedias.getValue()).get(position);
-        Log.d(TAG, "onContactClick: " + mediaModel.getId());
+        Contact contact = Objects.requireNonNull(mediaViewModel.allMedias.getValue()).get(position);
+        Log.d(TAG, "onContactClick: " + contact.getId());
 
         Intent intent = new Intent(MainActivity.this, NewContact.class);
-        intent.putExtra(MEDIA_ID, mediaModel.getId());
+        intent.putExtra(MEDIA_ID, contact.getId());
         startActivity(intent);
     }
 }

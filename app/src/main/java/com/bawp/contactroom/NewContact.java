@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.bawp.contactroom.model.MediaModel;
+import com.bawp.contactroom.model.Contact;
 import com.bawp.contactroom.model.MediaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -97,14 +97,14 @@ public class NewContact extends AppCompatActivity {
             Snackbar.make(enterName, R.string.empty, Snackbar.LENGTH_SHORT)
                     .show();
         } else {
-            MediaModel mediaModel = new MediaModel();
-            mediaModel.setId(contactId);
-            mediaModel.setName(name);
-            mediaModel.setOccupation(occupation);
+            Contact contact = new Contact();
+            contact.setId(contactId);
+            contact.setName(name);
+            contact.setOccupation(occupation);
             if (isDelete)
-                MediaViewModel.delete(mediaModel);
+                MediaViewModel.delete(contact);
             else
-                MediaViewModel.update(mediaModel);
+                MediaViewModel.update(contact);
             finish();
 
         }

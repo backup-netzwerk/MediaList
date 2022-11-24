@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contact_table")
-public class MediaModel {
+public class Contact {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -18,10 +18,10 @@ public class MediaModel {
     private String occupation;
 
 
-    public MediaModel() {
+    public Contact() {
     }
 
-    public MediaModel(@NonNull String name, String occupation) {
+    public Contact(@NonNull String name, String occupation) {
         this.name = name;
         this.occupation = occupation;
     }

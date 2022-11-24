@@ -3,7 +3,7 @@ package com.bawp.contactroom.util;
 import android.content.Context;
 
 import com.bawp.contactroom.data.ContactDao;
-import com.bawp.contactroom.model.MediaModel;
+import com.bawp.contactroom.model.Contact;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,7 +14,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {MediaModel.class}, version = 1, exportSchema = false)
+@Database(entities = {Contact.class}, version = 1, exportSchema = false)
 public abstract class ContactRoomDatabase extends RoomDatabase {
 
     public static final int NUMBER_OF_THREADS = 4;
@@ -31,8 +31,8 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
                         ContactDao contactDao = INSTANCE.contactDao();
                         contactDao.deleteAll();
 
-                        MediaModel mediaModel = new MediaModel("Imagem", "isso é uma descrição de teste...");
-                        contactDao.insert(mediaModel);
+                        Contact contact = new Contact("Imagem", "isso é uma descrição de teste...");
+                        contactDao.insert(contact);
 
 
                     });
