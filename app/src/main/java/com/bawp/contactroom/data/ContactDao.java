@@ -21,7 +21,8 @@ public interface ContactDao {
     @Query("DELETE FROM contact_table")
     void deleteAll();
 
-    @Query("SELECT * FROM contact_table ORDER BY name ASC")
+    // ordered by the latest updated and added items in the top to bottom
+    @Query("SELECT * FROM contact_table ORDER BY deliveryDate DESC")
     LiveData<List<Contact>> getAllItems();
 
     @Query("SELECT * FROM contact_table WHERE contact_table.id == :id")

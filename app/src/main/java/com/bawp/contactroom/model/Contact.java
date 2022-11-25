@@ -17,13 +17,17 @@ public class Contact {
     @ColumnInfo(name = "occupation")
     private String occupation;
 
+    @ColumnInfo(name = "deliveryDate")
+    private String deliveryDate;
+
 
     public Contact() {
     }
 
-    public Contact(@NonNull String name, String occupation) {
+    public Contact(@NonNull String name, String occupation, String deliveryDate) {
         this.name = name;
         this.occupation = occupation;
+        this.deliveryDate = deliveryDate;
     }
 
     public void setId(int id) {
@@ -49,6 +53,14 @@ public class Contact {
 
     public String getOccupation() {
         return occupation;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
 }

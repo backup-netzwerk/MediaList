@@ -7,12 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.bawp.contactroom.media_list.MediaList;
 import com.bawp.contactroom.model.Contact;
 import com.bawp.contactroom.model.MediaViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class NewContact extends AppCompatActivity {
     public static final String NAME_REPLY = "name_reply";
@@ -39,8 +45,8 @@ public class NewContact extends AppCompatActivity {
                 .getApplication())
                 .create(MediaViewModel.class);
 
-        if (getIntent().hasExtra(MainActivity.MEDIA_ID)) {
-            contactId = getIntent().getIntExtra(MainActivity.MEDIA_ID, 0);
+        if (getIntent().hasExtra(MediaList.MEDIA_ID)) {
+            contactId = getIntent().getIntExtra(MediaList.MEDIA_ID, 0);
 
             mediaViewModel.get(contactId).observe(this, contact -> {
                 if (contact != null) {
@@ -101,6 +107,11 @@ public class NewContact extends AppCompatActivity {
             contact.setId(contactId);
             contact.setName(name);
             contact.setOccupation(occupation);
+
+            Locale localeBr = new Locale("pt", "BR");
+            DateFormat sdf = new SimpleDateFormat("dd'/'MM'/'yy 'às' HH:mm", localeBr);
+            String nowDate = sdf.format(new Date());
+            contact.setDeliveryDate(nowDate);
             if (isDelete)
                 MediaViewModel.delete(contact);
             else

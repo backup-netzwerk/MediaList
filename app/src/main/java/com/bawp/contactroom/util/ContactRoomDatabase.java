@@ -31,8 +31,8 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
                         ContactDao contactDao = INSTANCE.contactDao();
                         contactDao.deleteAll();
 
-                        Contact contact = new Contact("Imagem", "isso é uma descrição de teste...");
-                        contactDao.insert(contact);
+//                        Contact contact = new Contact("image", "isso é uma descrição de teste...", "24/11/2022");
+//                        contactDao.insert(contact);
 
 
                     });

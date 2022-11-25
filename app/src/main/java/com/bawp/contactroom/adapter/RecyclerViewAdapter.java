@@ -1,9 +1,11 @@
 package com.bawp.contactroom.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bawp.contactroom.R;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -37,11 +40,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Contact contact = Objects.requireNonNull(contactList.get(position));
-        holder.name.setText(contact.getName());
-        holder.occupation.setText(contact.getOccupation());
+        Contact item = Objects.requireNonNull(contactList.get(position));
 
+        String mediaName = item.getName();
 
+        // set icon
+        String mediaTypeBr = "texto";
+        if(mediaName.equals("image")) mediaTypeBr = "imagem";
+        if(mediaName.equals("video")) mediaTypeBr = "vídeo";
+
+        holder.name.setText(mediaTypeBr);
+        holder.occupation.setText(item.getOccupation());
+        holder.deliveryDate.setText(item.getDeliveryDate());
+
+        if(mediaName.equals("text")) holder.mediaIconImgBtn.setBackgroundResource(R.drawable.ic_baseline_text_snippet_44);
+        if(mediaName.equals("video")) holder.mediaIconImgBtn.setBackgroundResource(R.drawable.ic_baseline_videocam_44);
+        if(mediaName.equals("image")) holder.mediaIconImgBtn.setBackgroundResource(R.drawable.ic_baseline_photo_44);
     }
 
     @Override
@@ -56,12 +70,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name;
         public TextView occupation;
+        public TextView deliveryDate;
+        public ImageButton mediaIconImgBtn;
+
         OnContactClickListener onContactClickListener;
 
         public ViewHolder(@NonNull View itemView, OnContactClickListener onContactClickListener) {
             super(itemView);
             name = itemView.findViewById(R.id.row_media_type_textview);
             occupation = itemView.findViewById(R.id.row_occupation_textview);
+            deliveryDate = itemView.findViewById(R.id.row_delivery_date_textview);
+            // Change icon dynamically
+            mediaIconImgBtn = itemView.findViewById(R.id.media_icon_img_btn);
+
             this.onContactClickListener = onContactClickListener;
             itemView.setOnClickListener(this);
         }
